@@ -1,0 +1,20 @@
+#!/bin/bash
+
+set -euo pipefail
+
+API_DIR=mesos_api
+
+pip install -r "$API_DIR"/test_requirements.txt
+
+echo ""
+echo "Running FLAKE8..."
+if [ -z $(flake8 "$API_DIR")]
+then
+    echo "FLAKE8 passed without warnings or errors"
+else
+    echo "Please, fix the FLAKE8 warnings"
+fi
+echo ""
+
+echo "Running PYLINT..."
+pylint --reports=n "$API_DIR"

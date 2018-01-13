@@ -1,0 +1,22 @@
+#!/bin/bash
+
+set -euo pipefail
+
+# Build dumb app container
+echo "Building Dumb application container..."
+DOCKER_APP_IMAGE_NAME=dumb-app
+docker build -t "$DOCKER_APP_IMAGE_NAME" dumb-app/.
+echo "Container "$DOCKER_APP_IMAGE_NAME" already created"
+
+# Build Mesos API
+echo "First running some basic format validation..."
+./script/test
+echo "Building API container..."
+DOCKER_API_IMAGE_NAME=mesos-api
+docker build -t "$DOCKER_API_IMAGE_NAME" mesos_api/.
+echo "Container "$DOCKER_API_IMAGE_NAME" already created"
+
+# Start Mesos + Marathon + API setup
+echo "Starting whole setup for demonstration..."
+docker-compose up
+
