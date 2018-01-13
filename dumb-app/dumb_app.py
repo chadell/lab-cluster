@@ -1,2 +1,3 @@
 import time
-while True: time.sleep(1)
+while True:
+    time.sleep(1)

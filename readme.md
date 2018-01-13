@@ -13,11 +13,13 @@ $ ./script/demo
 ```bash
 $ curl -X GET http://localhost:5000
 {
+    "Delete a service": "DELETE /services/<service_name>",
     "Deploy a service": "POST /services",
-    "Get service instance": "GET /services/<service_name>/<instance_id>",
+    "Get service/instance info": "GET /services/<service_name>/<instance_id>",
+    "Kill an instance": "DELETE /services/<service_name>/<instance_id>",
     "List of services": "GET /services",
     "List service instances": "GET /services/<service_name>",
-    "Start/Stop a service instance": "PUT /services/<service_name>/<instance_id>?action=<action>"
+    "Update a service": "PUT /services/<service_name>?action=<scaleup, scaledown, restart>"
 }
 
 $ curl -X GET http://localhost:5000/services

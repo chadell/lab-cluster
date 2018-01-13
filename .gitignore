@@ -1,2 +1,6 @@
 *.pyc
 *.log
+.cache/
+.coverage
+.eggs/
+*.egg-info/

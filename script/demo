@@ -2,21 +2,50 @@
 
 set -euo pipefail
 
+function echo_colour {
+    text=$1
+    colour=$2
+    yellow=`tput setaf 3`
+    green=`tput setaf 2`
+    reset=`tput sgr0`
+    case $2 in
+        "green") echo "${green}${1}${reset}" ;;
+        "yellow") echo "${yellow}${1}${reset}" ;;
+        *) echo "INVALID COLOUR!" ;;
+    esac
+}
+
+
+function wait_for_user {
+    # echo "${yellow}Please, enter some input to continue${reset}"
+    echo_colour "Please, enter some input to continue" "yellow"
+    read input_variable
+}
+
+# Demo index
+echo "This demo does three sequentials tasks:
+1. Build a fake app to be deployed
+2. Build an API to interact with Marathon
+3. Run together the Mesos environment together with the developed API (http://localhost:5000)"
+wait_for_user
+
 # Build dumb app container
-echo "Building Dumb application container..."
+echo_colour "Building Dumb application container..." "yellow"
 DOCKER_APP_IMAGE_NAME=dumb-app
 docker build -t "$DOCKER_APP_IMAGE_NAME" dumb-app/.
-echo "Container "$DOCKER_APP_IMAGE_NAME" already created"
+echo_colour "Container "$DOCKER_APP_IMAGE_NAME" already created" "green"
+wait_for_user
 
 # Build Mesos API
-echo "First running some basic format validation..."
+echo_colour "First running some basic format validation..." "yellow"
 ./script/test
-echo "Building API container..."
+echo_colour "Building API container..." "yellow"
 DOCKER_API_IMAGE_NAME=mesos-api
 docker build -t "$DOCKER_API_IMAGE_NAME" mesos_api/.
-echo "Container "$DOCKER_API_IMAGE_NAME" already created"
+echo_colour "Container "$DOCKER_API_IMAGE_NAME" already created" "green"
+wait_for_user
 
 # Start Mesos + Marathon + API setup
-echo "Starting whole setup for demonstration..."
+echo_colour "Starting whole setup for demonstration..." "yellow"
 docker-compose up
 
