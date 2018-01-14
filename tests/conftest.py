@@ -1,6 +1,5 @@
 # pylint: disable=redefined-outer-name
 import pytest
-
 from mesos_api.api import create_app
 
 

@@ -1,4 +1,5 @@
 from flask_restful import reqparse
+from flask_login import login_required
 from marathon.exceptions import MarathonError
 from marathon.models import MarathonApp
 from .mesosapi import ApiMesos
@@ -8,6 +9,9 @@ class Services(ApiMesos):
     '''
     Endpoint /services
     '''
+
+    decorators = [login_required]
+
     def __init__(self):
         self.reqparse = reqparse.RequestParser()
         self.reqparse.add_argument('service', type=str, location='json')

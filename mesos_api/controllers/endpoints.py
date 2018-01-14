@@ -1,9 +1,6 @@
 from flask_restful import Resource
+from flask_login import login_required
 
-# Start service instance
-# Stop service instance
-# Get service instance
-# List service instances
 
 ENDPOINTS = {
     'Deploy a service': 'POST /services',
@@ -17,6 +14,9 @@ ENDPOINTS = {
 
 
 class EndpointsList(Resource):
+
+    decorators = [login_required]
+
     @staticmethod
     def get():
         return ENDPOINTS

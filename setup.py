@@ -35,7 +35,7 @@ setup(
     author_email='chadell@gmail.com',
     packages=find_packages(),
     entry_points={'console_scripts': [
-        'mesos-api = mesos_api.pai:main'
+        'mesos-api = mesos_api.api:main'
     ]},
     install_requires=[str(req.req) for req in parse_requirements('mesos_api/requirements.txt', session=False)],
     tests_require=[str(req.req) for req in parse_requirements('mesos_api/test_requirements.txt', session=False)],
